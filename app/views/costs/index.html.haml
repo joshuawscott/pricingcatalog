@@ -1,0 +1,24 @@
+%h1 Listing costs
+
+= link_to 'New Cost', new_cost_path
+%table.table
+  %tr
+    %th Price
+    %th Valid date
+    %th Product
+    %th
+    %th
+    %th
+
+  - @costs.each do |cost|
+    %tr
+      %td= cost.price
+      %td= cost.valid_date
+      %td= cost.product.try(:description)
+      %td= link_to 'Show', cost
+      %td= link_to 'Edit', edit_cost_path(cost)
+      %td= link_to 'Destroy', cost, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Cost', new_cost_path

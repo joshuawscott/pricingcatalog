@@ -1,0 +1,22 @@
+%h1 Products
+= link_to 'Add New Product', new_product_path
+%table.table
+  %tr
+    %th Product Number
+    %th Description
+    %th Source
+    %th
+    %th
+    %th
+
+  - @products.each do |product|
+    %tr
+      %td= product.product_number
+      %td= product.description
+      %td= link_to 'Show', product
+      %td= link_to 'Edit', edit_product_path(product)
+      %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'Add New Product', new_product_path

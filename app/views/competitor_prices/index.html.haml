@@ -1,0 +1,24 @@
+%h1 Competitor prices
+
+= link_to 'New Competitor Price', new_competitor_price_path
+%table.table
+  %tr
+    %th Price
+    %th Valid date
+    %th Product
+    %th
+    %th
+    %th
+
+  - @competitor_prices.each do |competitor_price|
+    %tr
+      %td= competitor_price.price
+      %td= competitor_price.valid_date
+      %td= competitor_price.product.try(:description)
+      %td= link_to 'Show', competitor_price
+      %td= link_to 'Edit', edit_competitor_price_path(competitor_price)
+      %td= link_to 'Destroy', competitor_price, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Competitor Price', new_competitor_price_path

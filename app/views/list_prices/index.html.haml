@@ -1,0 +1,24 @@
+%h1 List prices
+
+= link_to 'New List Price', new_list_price_path
+%table.table
+  %tr
+    %th Price
+    %th Valid date
+    %th Product
+    %th
+    %th
+    %th
+
+  - @list_prices.each do |list_price|
+    %tr
+      %td= list_price.price
+      %td= list_price.valid_date
+      %td= list_price.product
+      %td= link_to 'Show', list_price
+      %td= link_to 'Edit', edit_list_price_path(list_price)
+      %td= link_to 'Destroy', list_price, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New List Price', new_list_price_path

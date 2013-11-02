@@ -1,0 +1,8 @@
+rake db:rollback
+rake db:rollback
+rake db:rollback
+rm db/migrate/*.rb
+rails g scaffold Cost price:decimal valid_date:date product:belongs_to
+rails g scaffold Price type:string price:decimal valid_date:date product:belongs_to
+rails g scaffold Product product_number:string description:string source:string
+rake db:migrate

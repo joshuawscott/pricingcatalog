@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b Price:
+  = @cost.price
+%p
+  %b Valid date:
+  = @cost.valid_date
+%p
+  %b Product:
+  = link_to @cost.product.try(:description), product_path(@cost.product)
+
+
+= link_to 'Edit', edit_cost_path(@cost)
+\|
+= link_to 'Back', costs_path

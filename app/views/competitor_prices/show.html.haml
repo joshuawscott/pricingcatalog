@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Price:
+  = @competitor_price.price
+%p
+  %b Valid date:
+  = @competitor_price.valid_date
+%p
+  %b Product:
+  = @competitor_price.product.try(:description)
+
+= link_to 'Edit', edit_competitor_price_path(@competitor_price)
+\|
+= link_to 'Back', competitor_prices_path
