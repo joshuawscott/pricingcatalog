@@ -14,9 +14,22 @@
  */
 
 body {
-    background: #000000 url('centricsit-background.png') no-repeat scroll center top;
+    background: darkred url('centricsit-background.png') no-repeat scroll center top;
     color: #EEEEEE;
     padding-top: 82px;
+}
+
+@media (max-width: 979px){
+    body {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 768px){
+    body {
+        background: darkred;
+        padding-top: 0;
+    }
 }
 
 h1 {
