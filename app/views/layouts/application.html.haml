@@ -4,7 +4,7 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "Pricing Catalog"
+    %title= content_for?(:title) ? yield(:title) : "CentricsIT Pricing Catalog"
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -19,7 +19,7 @@
 
 
   %body
-    .navbar.navbar-fluid-top
+    .navbar.navbar-fluid-top.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container-fluid
           %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
@@ -27,9 +27,10 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") Pricing Catalog
+          %a.brand(href="#")
+            = image_tag('centricsit-logo.png')
           .container.nav-collapse
-            %ul.nav
+            %ul.nav.large
               %li= link_to "Products", "/products"
               %li= link_to "List Prices", "/list_prices"
               %li= link_to "Competitor Prices", "/competitor_prices"

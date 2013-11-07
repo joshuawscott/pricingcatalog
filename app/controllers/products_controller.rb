@@ -61,6 +61,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def price_lookup
+    product_numbers = params[:pn].split(',')
+    @products = Product.where(product_number: product_numbers)
+    #products_hash = products.map {|product| {product_number: product.product_number, list_price: product.current_list_price, description: product.description}}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

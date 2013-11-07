@@ -157,4 +157,21 @@ describe ProductsController do
     end
   end
 
+  describe "GET price_lookup" do
+    let(:product) {Product.create! valid_attributes.merge({product_number: 'AB101A'})}
+    let(:product2) {Product.create! valid_attributes.merge({product_number: 'AB102A'})}
+    let(:list_price) { ListPrice.create!({price: 10.00 }) }
+    let(:list_price2) { ListPrice.create!({price: 10.00 }) }
+    before { product.stub(:current_list_price).and_return(list_price)}
+    before { product.stub(:current_list_price).and_return(list_price2)}
+    it "finds the product by product number" do
+      expect(Product).to receive(:where).with({product_number: ['AB101A']})
+      get :price_lookup, {format: 'json', pn: 'AB101A'}
+    end
+    it "finds multiple product numbers" do
+      expect(Product).to receive(:where).with({product_number: ['AB101A','AB102A']})
+      get :price_lookup, {format: 'json', pn: 'AB101A,AB102A'}
+    end
+  end
+
 end

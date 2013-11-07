@@ -14,6 +14,6 @@
     = f.date_select :valid_date
   .field
     = f.label :product
-    = f.select :product, options_from_collection_for_select(Product.all, :id, :description), include_blank: true
+    = f.select :product_id, options_from_collection_for_select(Product.all, :id, :description), include_blank: true
   .actions
     = f.submit 'Save', class: 'btn'
