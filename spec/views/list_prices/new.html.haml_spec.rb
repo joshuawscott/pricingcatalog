@@ -14,7 +14,7 @@ describe "list_prices/new" do
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", list_prices_path, "post" do
       assert_select "input#list_price_price[name=?]", "list_price[price]"
-      assert_select "select#list_price_product[name=?]", "list_price[product]"
+      assert_select "select#list_price_product_id[name=?]", "list_price[product_id]"
     end
   end
 end

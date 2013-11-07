@@ -12,3 +12,44 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+    background: #000000 url('centricsit-background.png') no-repeat scroll center top;
+    color: #EEEEEE;
+    padding-top: 82px;
+}
+
+h1 {
+    color: #EEEEEE
+}
+
+select {
+    background-color: #EEEEEE;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"],
+input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
+.uneditable-input {
+    background-color: #EEEEEE;
+}
+
+label {
+    color: #EEEEEE;
+}
+
+a {
+    color: #FFFC49;
+}
+
+a:hover {
+    color: #AAFFFF;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+    font-size: 133%;
+}
+
+.nav>li {
+    vertical-align: middle;
+}

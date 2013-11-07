@@ -31,5 +31,9 @@ describe ProductsController do
       delete("/products/1").should route_to("products#destroy", :id => "1")
     end
 
+    it "routes to #price_lookup" do
+      get("/products/price_lookup?pn=AB101A").should route_to("products#price_lookup", :pn => 'AB101A')
+    end
+
   end
 end

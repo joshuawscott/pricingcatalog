@@ -13,7 +13,7 @@ describe "competitor_prices/new" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", competitor_prices_path, "post" do
-      assert_select "select#competitor_price_product[name=?]", "competitor_price[product]"
+      assert_select "select#competitor_price_product_id[name=?]", "competitor_price[product_id]"
     end
   end
 end
