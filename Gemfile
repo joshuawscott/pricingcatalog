@@ -25,4 +25,5 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'shoulda'
 end

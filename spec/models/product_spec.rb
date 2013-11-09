@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Product do
+  it { should have_many(:list_prices) }
+  it { should have_many(:competitor_prices) }
+  it { should have_many(:costs) }
+  it { should validate_presence_of(:product_number) }
+  it { should validate_presence_of(:description) }
+
   let(:valid_attributes) { {product_number: "MyProductNumber", description: "MyDescription"} }
   let(:list_price_valid_attributes) { {price: 10.00} }
   let(:cost_valid_attributes) { {price: 10.00} }

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "products/edit" do
-  before(:each) do
+  before :each do
     @product = assign(:product, stub_model(Product,
       :product_number => "MyString",
       :description => "MyString"
@@ -11,7 +11,6 @@ describe "products/edit" do
   it "renders the edit product form" do
     render
 
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form[action=?][method=?]", product_path(@product), "post" do
       assert_select "input#product_product_number[name=?]", "product[product_number]"
       assert_select "input#product_description[name=?]", "product[description]"

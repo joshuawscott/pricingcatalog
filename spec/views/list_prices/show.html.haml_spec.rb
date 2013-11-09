@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "list_prices/show" do
-  before(:each) do
+  before :each do
     @list_price = assign(:list_price, stub_model(ListPrice,
       :price => "9.99",
       :product => stub_model(Product, description: "MyProduct")
