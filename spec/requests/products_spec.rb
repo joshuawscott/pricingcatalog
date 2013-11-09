@@ -10,9 +10,9 @@ describe "Products" do
 
   describe "price_lookup" do
     let!(:product) { Product.create! product_number: 'AB101A', description: 'MyCoolProduct'}
-    let!(:list_price) { ListPrice.create! price: 10.00 }
+    let!(:list_price) { ListPrice.create! price: 10.00, product: product }
     let!(:product2) { Product.create! product_number: 'AB102A', description: 'MyCoolProduct2'}
-    let!(:list_price2) { ListPrice.create! price: 20.00 }
+    let!(:list_price2) { ListPrice.create! price: 20.00, product: product2 }
     before do
       product.list_prices = [list_price]
       product2.list_prices = [list_price2]

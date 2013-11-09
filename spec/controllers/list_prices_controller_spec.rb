@@ -23,7 +23,8 @@ describe ListPricesController do
   # This should return the minimal set of attributes required to create a valid
   # ListPrice. As you add validations to ListPrice, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "price" => "9.99" } }
+  let(:product) {mock_model(Product)}
+  let(:valid_attributes) { { "price" => "9.99", "product_id" => product.id.to_s } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

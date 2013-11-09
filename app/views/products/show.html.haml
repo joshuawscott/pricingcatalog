@@ -1,12 +1,10 @@
-%p#notice= notice
-
-%p
-  %b Product number:
+%h2
   = @product.product_number
-%p
-  %b Description:
+%h3.subtitle
   = @product.description
-
+%p
+  %b Current List Price:
+  = @product.current_list_price.price
 = link_to 'Edit', edit_product_path(@product)
 \|
 = link_to 'Back', products_path

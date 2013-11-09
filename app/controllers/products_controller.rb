@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if params[:q].blank?
+      @products = Product.limit(25)
+    else
+      @products = Product.where("lower(product_number) like(?)", "%#{params[:q].downcase}%").limit(25)
+    end
   end
 
   # GET /products/1
@@ -15,6 +19,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @product.list_prices.build
   end
 
   # GET /products/1/edit
@@ -31,6 +36,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render action: 'show', status: :created, location: @product }
       else
+        @product.list_prices.build
         format.html { render action: 'new' }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -75,6 +81,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:product_number, :description)
+      params.require(:product).permit(:product_number, :description, list_prices_attributes: [:price, :valid_date])
     end
 end

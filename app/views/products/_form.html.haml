@@ -12,5 +12,13 @@
   .field
     = f.label :description
     = f.text_field :description
+  = f.fields_for :list_prices do |list_price_form|
+    .field
+      = list_price_form.label :price, "List Price"
+      = list_price_form.text_field :price
+    .field
+      = list_price_form.label :valid_date
+      = list_price_form.date_field :valid_date
+
   .actions
     = f.submit 'Save', class: 'btn'

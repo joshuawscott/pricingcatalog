@@ -11,7 +11,7 @@
     = f.text_field :price
   .field
     = f.label :valid_date
-    = f.date_select :valid_date
+    = f.date_field :valid_date
   .field
     = f.label :product
     = f.select :product_id, options_from_collection_for_select(Product.all, :id, :description), include_blank: true

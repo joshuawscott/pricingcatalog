@@ -1,19 +1,23 @@
 %h1 Products
+%p
+  =form_tag(products_path, {method: :get}) do
+    %label{name: :q} Search:
+    = text_field_tag :q, params[:q], placeholder: 'Enter Product Number'
+
 = link_to 'Add New Product', new_product_path
 %table.table
   %tr
     %th Product Number
     %th Description
-    %th Source
-    %th
+    %th Current List Price
     %th
     %th
 
   - @products.each do |product|
     %tr
-      %td= product.product_number
+      %td= link_to product.product_number, product
       %td= product.description
-      %td= link_to 'Show', product
+      %td= product.current_list_price.price
       %td= link_to 'Edit', edit_product_path(product)
       %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

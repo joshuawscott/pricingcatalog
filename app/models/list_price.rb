@@ -1,4 +1,4 @@
 class ListPrice < Price
   validates_presence_of :price
-  belongs_to :product
+  validates_presence_of :product_id
 end

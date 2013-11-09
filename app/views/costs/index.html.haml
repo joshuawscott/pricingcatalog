@@ -14,7 +14,7 @@
     %tr
       %td= cost.price
       %td= cost.valid_date
-      %td= cost.product.try(:description)
+      %td= cost.product.product_number
       %td= link_to 'Show', cost
       %td= link_to 'Edit', edit_cost_path(cost)
       %td= link_to 'Destroy', cost, :method => :delete, :data => { :confirm => 'Are you sure?' }

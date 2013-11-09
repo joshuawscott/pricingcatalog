@@ -14,10 +14,18 @@
  */
 
 body {
-    background: darkred url('centricsit-background.png') no-repeat scroll center top;
-    color: #EEEEEE;
+    background: #ECECEC none;
+    color: #727272;
     padding-top: 82px;
 }
+/* taken from Centrics website */
+a {
+    color: #3b72b2
+}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
+a:active{text-decoration:none;}
 
 @media (max-width: 979px){
     body {
@@ -27,36 +35,20 @@ body {
 
 @media (max-width: 768px){
     body {
-        background: darkred;
+        background: #ECECEC none;
         padding-top: 0;
     }
 }
 
-h1 {
-    color: #EEEEEE
-}
-
 select {
-    background-color: #EEEEEE;
+    background-color: #ECECF8;
 }
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"],
 input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"],
 input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"],
 .uneditable-input {
-    background-color: #EEEEEE;
-}
-
-label {
-    color: #EEEEEE;
-}
-
-a {
-    color: #FFFC49;
-}
-
-a:hover {
-    color: #AAFFFF;
+    background-color: #ECECF8;
 }
 
 .navbar-inverse .brand, .navbar-inverse .nav>li>a {

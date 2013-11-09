@@ -4,13 +4,18 @@ describe Product do
   it { should have_many(:list_prices) }
   it { should have_many(:competitor_prices) }
   it { should have_many(:costs) }
+
   it { should validate_presence_of(:product_number) }
   it { should validate_presence_of(:description) }
 
+  it { should accept_nested_attributes_for(:list_prices) }
+  it { should accept_nested_attributes_for(:competitor_prices) }
+  it { should accept_nested_attributes_for(:costs) }
+
   let(:valid_attributes) { {product_number: "MyProductNumber", description: "MyDescription"} }
-  let(:list_price_valid_attributes) { {price: 10.00} }
-  let(:cost_valid_attributes) { {price: 10.00} }
   let(:product) { Product.create! valid_attributes }
+  let(:list_price_valid_attributes) { {price: 10.00, product: product} }
+  let(:cost_valid_attributes) { {price: 10.00, product: product} }
   let(:list_price) { ListPrice.create! list_price_valid_attributes }
   describe 'list_prices' do
     it 'finds the list prices' do
