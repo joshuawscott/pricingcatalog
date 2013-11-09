@@ -77,6 +77,8 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    paranoia (2.0.1)
+      activerecord (~> 4.0)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -184,6 +186,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
+  paranoia (~> 2.0)
   pg
   pry
   pry-debugger

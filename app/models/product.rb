@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
-  has_many :list_prices
-  has_many :competitor_prices
-  has_many :costs
+  acts_as_paranoid
+  has_many :list_prices, dependent: :destroy
+  has_many :competitor_prices, dependent: :destroy
+  has_many :costs, dependent: :destroy
   validates_presence_of :product_number
   validates_presence_of :description
 
