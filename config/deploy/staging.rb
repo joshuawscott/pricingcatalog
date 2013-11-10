@@ -6,7 +6,7 @@ set :group, "ubuntu"
 
 role :app, hostname
 role :web, hostname
-role :db, hostname
+role :db, hostname, primary: true
 
 require "rvm/capistrano"
 
