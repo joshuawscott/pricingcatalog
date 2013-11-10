@@ -21,8 +21,8 @@ working_directory app_path
 rails_env = ENV['RAILS_ENV'] || 'production'
 
 # Log everything to one file
-stderr_path app_path + "log/unicorn.err.log"
-stdout_path app_path + "log/unicorn.out.log"
+stderr_path app_path + "/log/unicorn.err.log"
+stdout_path app_path + "/log/unicorn.out.log"
 
 # Set master PID location
 pid "#{app_path}/tmp/pids/unicorn.pid"
