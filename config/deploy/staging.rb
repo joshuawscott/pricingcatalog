@@ -1,15 +1,22 @@
-set :stage, :staging
+set :hostname, 'ec2-54-200-171-179.us-west-2.compute.amazonaws.com'
+set :rails_env, 'staging'
+set :deploy_to, "/home/ubuntu/www/#{application}"
+set :username, 'ubuntu'
+set :user, "ubuntu"
+set :group, "ubuntu"
+role :app, hostname
+role :web, hostname
+role :db, hostname
 
-CONFIG = {name: 'ec2-54-200-171-179.us-west-2.compute.amazonaws.com'}
 
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary
 # server in each group is considered to be the first
 # unless any hosts have the primary property set.
-role :app, %W{ubuntu@#{CONFIG[:name]}}
-role :web, %W{ubuntu@#{CONFIG[:name]}}
-role :db, %W{ubuntu@#{CONFIG[:name]}}
+#role :app, %W{ubuntu@#{CONFIG[:name]}}
+#role :web, %W{ubuntu@#{CONFIG[:name]}}
+#role :db, %W{ubuntu@#{CONFIG[:name]}}
 
 # Extended Server Syntax
 # ======================
