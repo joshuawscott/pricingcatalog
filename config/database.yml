@@ -58,3 +58,10 @@ production:
   pool: 5
   username: pricingcatalog
   password:
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: pricingcatalog_staging
+  pool: 5
+  username: rails
