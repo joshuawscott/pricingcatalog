@@ -1,4 +1,6 @@
+
 set :use_sudo, false
+require 'bundler/capistrano'
 require 'capistrano-unicorn'
 set :stages, %w(production staging)
 set :default_stage, "staging"

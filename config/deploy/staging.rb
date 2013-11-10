@@ -10,10 +10,16 @@ role :db, hostname
 
 require "rvm/capistrano"
 
-set :rvm_ruby_string, '2.0.0'
+set :rvm_ruby_string, 'ruby-2.0.0-p247'
+#after "deploy:setup", "deploy:set_rvm_version"
 
-set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+#set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+#namespace :deploy do
+  #task :set_rvm_version, :roles => :app, :except => { :no_release => true } do
+    #run "source /etc/profile.d/rvm.sh && rvm use #{rvm_ruby_string} --default"
+  #end
+#end
 
 before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
 before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
