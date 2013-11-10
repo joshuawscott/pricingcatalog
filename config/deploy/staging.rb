@@ -8,6 +8,15 @@ role :app, hostname
 role :web, hostname
 role :db, hostname
 
+require "rvm/capistrano"
+
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+
+before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
+before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
+# before 'deploy:setup', 'rvm:create_gemset' # only create gemset
+
 
 # Simple Role Syntax
 # ==================

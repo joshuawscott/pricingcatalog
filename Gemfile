@@ -29,6 +29,7 @@ group :development, :test do
   gem 'capistrano', '~> 2'
   gem 'capistrano-rails'
   gem 'capistrano-unicorn', require: false
+  gem 'rvm-capistrano'
   gem 'pry'
   gem 'pry-debugger'
   gem 'rspec'
