@@ -28,6 +28,7 @@ gem 'unicorn'
 group :development, :test do
   gem 'capistrano'
   gem 'capistrano-rails'
+  gem 'capistrano-unicorn', require: false
   gem 'pry'
   gem 'pry-debugger'
   gem 'rspec'
