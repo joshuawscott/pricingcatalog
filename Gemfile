@@ -27,6 +27,7 @@ gem 'unicorn'
 
 group :development, :test do
   gem 'capistrano'
+  gem 'capistrano-rails'
   gem 'pry'
   gem 'pry-debugger'
   gem 'rspec'
