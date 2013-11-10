@@ -1,14 +1,16 @@
 set :hostname, 'ec2-54-200-171-179.us-west-2.compute.amazonaws.com'
 set :rails_env, 'staging'
 set :deploy_to, "/home/ubuntu/www/#{application}"
-set :username, 'ubuntu'
 set :user, "ubuntu"
 set :group, "ubuntu"
+
 role :app, hostname
 role :web, hostname
 role :db, hostname
 
 require "rvm/capistrano"
+
+set :rvm_ruby_string, '2.0.0'
 
 set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
