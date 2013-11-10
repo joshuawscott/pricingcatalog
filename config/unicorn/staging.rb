@@ -9,7 +9,7 @@ app_path = "/home/ubuntu/www/pricingcatalog/current"
 worker_processes 1
 preload_app true
 timeout 180
-listen app_path + "../shared/system/unicorn.sock"
+listen app_path + "/../shared/system/unicorn.sock"
 
 # Spawn unicorn master worker for user apps (group: apps)
 user 'ubuntu', 'ubuntu' 
