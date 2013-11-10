@@ -9,7 +9,7 @@ app_path = "/home/ubuntu/www/pricingcatalog/current"
 worker_processes 1
 preload_app true
 timeout 180
-listen "127.0.0.1:9000"
+listen "0.0.0.0:9000"
 
 # Spawn unicorn master worker for user apps (group: apps)
 user 'ubuntu', 'ubuntu' 
