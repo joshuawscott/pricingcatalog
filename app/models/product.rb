@@ -1,8 +1,8 @@
 class Product < ActiveRecord::Base
   acts_as_paranoid
 
-  has_many :list_prices, dependent: :destroy
-  has_many :competitor_prices, dependent: :destroy
+  has_many :list_prices, dependent: :destroy, inverse_of: :product
+  has_many :competitor_prices, dependent: :destroy, inverse_of: :product
   has_many :costs, dependent: :destroy
 
   validates_presence_of :product_number

@@ -18,7 +18,7 @@
       = list_price_form.text_field :price
     .field
       = list_price_form.label :valid_date
-      = list_price_form.date_field :valid_date
+      = list_price_form.date_field :valid_date, value: Time.zone.now.to_date
 
   .actions
     = f.submit 'Save', class: 'btn'
