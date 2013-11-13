@@ -70,7 +70,12 @@ class ProductsController < ApplicationController
   def price_lookup
     product_numbers = params[:pn].split(',')
     @products = Product.where(product_number: product_numbers)
-    #products_hash = products.map {|product| {product_number: product.product_number, list_price: product.current_list_price, description: product.description}}
+    if @products.present?
+      found_product_numbers = @products.map(&:product_number)
+      @missing_product_numbers = (product_numbers - found_product_numbers).uniq
+    else
+      render json: {products: [], not_found: product_numbers}
+    end
   end
 
   private

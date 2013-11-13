@@ -14,7 +14,8 @@ class CostsController < ApplicationController
 
   # GET /costs/new
   def new
-    @cost = Cost.new
+    @cost = Cost.new params[:cost]
+    @cost.product_id ||= params[:product_id]
   end
 
   # GET /costs/1/edit
@@ -28,7 +29,7 @@ class CostsController < ApplicationController
 
     respond_to do |format|
       if @cost.save
-        format.html { redirect_to @cost, notice: 'Cost was successfully created.' }
+        format.html { redirect_to @cost.product, notice: 'Cost was successfully created.' }
         format.json { render action: 'show', status: :created, location: @cost }
       else
         format.html { render action: 'new' }

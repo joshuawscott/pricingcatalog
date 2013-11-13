@@ -23,7 +23,7 @@ describe CostsController do
   # This should return the minimal set of attributes required to create a valid
   # Cost. As you add validations to Cost, be sure to
   # adjust the attributes here as well.
-  let(:product) {mock_model(Product)}
+  let(:product) {Product.create product_number: "AB101A", description: "MyDescription"}
   let(:valid_attributes) { { "price" => "9.99", "product_id" => product.id.to_s } }
 
   # This should return the minimal set of values that should be in the session
@@ -76,9 +76,9 @@ describe CostsController do
         assigns(:cost).should be_persisted
       end
 
-      it "redirects to the created cost" do
+      it "redirects to the created cost's product" do
         post :create, {:cost => valid_attributes}, valid_session
-        response.should redirect_to(Cost.last)
+        response.should redirect_to(Cost.last.product)
       end
     end
 

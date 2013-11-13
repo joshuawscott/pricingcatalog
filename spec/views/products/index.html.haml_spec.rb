@@ -21,6 +21,6 @@ describe "products/index" do
     render
     assert_select "tr>td", :text => "Product Number", :count => 2
     assert_select "tr>td", :text => "Description", :count => 2
-    assert_select "tr>td", :text => "9.99", :count => 2
+    assert_select "tr>td", :text => "$9.99", :count => 2
   end
 end

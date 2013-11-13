@@ -14,7 +14,8 @@ class CompetitorPricesController < ApplicationController
 
   # GET /competitor_prices/new
   def new
-    @competitor_price = CompetitorPrice.new
+    @competitor_price = CompetitorPrice.new params[:competitor_price]
+    @competitor_price.product_id ||= params[:product_id]
   end
 
   # GET /competitor_prices/1/edit
@@ -28,7 +29,7 @@ class CompetitorPricesController < ApplicationController
 
     respond_to do |format|
       if @competitor_price.save
-        format.html { redirect_to @competitor_price, notice: 'Competitor Price was successfully created.' }
+        format.html { redirect_to @competitor_price.product, notice: 'Competitor Price was successfully created.' }
         format.json { render action: 'show', status: :created, location: @competitor_price }
       else
         format.html { render action: 'new' }

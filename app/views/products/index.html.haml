@@ -17,7 +17,7 @@
     %tr
       %td= link_to product.product_number, product
       %td= product.description
-      %td= product.current_list_price.price
+      %td= number_to_currency(product.current_list_price.price)
       %td= link_to 'Edit', edit_product_path(product)
       %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

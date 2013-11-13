@@ -23,7 +23,7 @@ describe ListPricesController do
   # This should return the minimal set of attributes required to create a valid
   # ListPrice. As you add validations to ListPrice, be sure to
   # adjust the attributes here as well.
-  let(:product) {mock_model(Product)}
+  let(:product) { Product.create product_number: 'AB101A', description: 'MyDescription' }
   let(:valid_attributes) { { "price" => "9.99", "product_id" => product.id.to_s } }
 
   # This should return the minimal set of values that should be in the session
@@ -76,9 +76,9 @@ describe ListPricesController do
         assigns(:list_price).should be_persisted
       end
 
-      it "redirects to the created list_price" do
+      it "redirects to the created list_price's product" do
         post :create, {:list_price => valid_attributes}, valid_session
-        response.should redirect_to(ListPrice.last)
+        response.should redirect_to(ListPrice.last.product)
       end
     end
 

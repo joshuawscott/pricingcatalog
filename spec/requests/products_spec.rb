@@ -21,14 +21,28 @@ describe "Products" do
 
     it 'returns a single product' do
       get price_lookup_products_path(format: :json, pn: 'AB101A')
-      expect(response.body).to eq [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00}].to_json
+      expect(response.body).to eq({products: [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00}]}.to_json)
     end
 
     it 'returns mutliple products' do
       get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A')
-      expect(response.body).to eq(
+      expect(response.body).to eq({products:
         [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
-         {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}].to_json)
+         {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}]}.to_json)
+    end
+
+    it 'returns failures for nonexistent products' do
+      get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A,NOTFOUND')
+      expect(response.body).to eq({products:
+        [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
+         {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}],
+                                  not_found: ['NOTFOUND']}.to_json)
+
+    end
+
+    it 'returns failures when only nonexistent products' do
+      get price_lookup_products_path(format: :json, pn: 'NOTFOUND')
+      expect(response.body).to eq({products: [], not_found: ['NOTFOUND']}.to_json)
     end
 
   end

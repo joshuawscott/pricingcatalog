@@ -4,7 +4,49 @@
   = @product.description
 %p
   %b Current List Price:
-  = @product.current_list_price.price
+  = number_to_currency(@product.current_list_price.price)
+.container
+  .row
+    .span4.well
+      .panel.panel-default
+        %h3.panel-title
+          List Prices
+          =link_to glyph(:plus), new_competitor_price_path(product_id: @product.id), class: 'btn btn-success'
+      %table.table
+        %tr
+          %th Date
+          %th
+        -@product.list_prices.recent(10).each do |price|
+          %tr
+            %td= price.valid_date
+            %td= number_to_currency(price.price)
+    .span4.well
+      .panel.panel-default
+        %h3.panel-title
+          Competitor Prices
+          =link_to glyph(:plus), new_competitor_price_path(product_id: @product.id), class: 'btn btn-success'
+        %table.table
+          %tr
+            %th Date
+            %th
+          -@product.competitor_prices.recent(10).each do |price|
+            %tr
+              %td= price.valid_date
+              %td= number_to_currency(price.price)
+    .span4.well
+      .panel.panel-default
+        %h3.panel-title
+          Costs
+          =link_to glyph(:plus), new_cost_path(product_id: @product.id), class: 'btn btn-success'
+        %table.table
+          %tr
+            %th Date
+            %th
+          -@product.costs.recent(10).each do |price|
+            %tr
+              %td= price.valid_date
+              %td= number_to_currency(price.price)
+
 = link_to 'Edit', edit_product_path(@product)
 \|
 = link_to 'Back', products_path

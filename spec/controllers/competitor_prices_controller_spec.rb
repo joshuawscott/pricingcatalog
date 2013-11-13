@@ -23,7 +23,7 @@ describe CompetitorPricesController do
   # This should return the minimal set of attributes required to create a valid
   # CompetitorPrice. As you add validations to CompetitorPrice, be sure to
   # adjust the attributes here as well.
-  let(:product) {mock_model(Product)}
+  let(:product) {Product.create product_number: "AB101A", description: "MyDescription"}
   let(:valid_attributes) { {"price" => "9.99", "product_id" => product.id.to_s} }
 
   # This should return the minimal set of values that should be in the session
@@ -76,9 +76,9 @@ describe CompetitorPricesController do
         assigns(:competitor_price).should be_persisted
       end
 
-      it "redirects to the created competitor_price" do
+      it "redirects to the associated product" do
         post :create, {competitor_price: valid_attributes}, valid_session
-        response.should redirect_to(CompetitorPrice.last)
+        response.should redirect_to(CompetitorPrice.last.product)
       end
     end
 

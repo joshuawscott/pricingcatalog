@@ -14,7 +14,8 @@ class ListPricesController < ApplicationController
 
   # GET /list_prices/new
   def new
-    @list_price = ListPrice.new
+    @list_price = ListPrice.new params[:list_price]
+    @list_price.product_id ||= params[:product_id]
   end
 
   # GET /list_prices/1/edit
@@ -28,7 +29,7 @@ class ListPricesController < ApplicationController
 
     respond_to do |format|
       if @list_price.save
-        format.html { redirect_to @list_price, notice: 'List Price was successfully created.' }
+        format.html { redirect_to @list_price.product, notice: 'List Price was successfully created.' }
         format.json { render action: 'show', status: :created, location: @list_price }
       else
         format.html { render action: 'new' }
