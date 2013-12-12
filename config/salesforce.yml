@@ -1,0 +1,13 @@
+development:
+  host: test.salesforce.com
+  username: mduncan@centricsit.com.melissa
+  password: Password122
+  client_id: '3MVG9Gmy2zmPB01qN1rLw_UQq4wjeywJ9hMq7nEAhP8vdla.eJe0mZ2aUvArZYuHmG_9LFFdI09HnzkhMm2HB'
+  client_secret: 4538047268537587654
+
+staging:
+  host: test.salesforce.com
+  username: mduncan@centricsit.com.melissa
+  password: Password122
+  client_id: '3MVG9Gmy2zmPB01qN1rLw_UQq4wjeywJ9hMq7nEAhP8vdla.eJe0mZ2aUvArZYuHmG_9LFFdI09HnzkhMm2HB'
+  client_secret: 4538047268537587654

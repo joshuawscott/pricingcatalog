@@ -14,10 +14,37 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :costs
 
   def current_list_price
-    list_prices.order(:valid_date).last
+    list_prices.order(:valid_date).last || NullPrice.new
   end
 
   def current_cost
     costs.order(:valid_date).last
+  end
+
+  def self.update_from_salesforce
+    if Product.count == 0
+      query = "IsActive = true"
+    else
+      time = Product.pluck(:updated_at).max
+      last_update = DateTime.new time.year, time.month, time.day, time.hour, time.min, time.sec
+      query = "LastModifiedDate > #{last_update} AND IsActive = true"
+    end
+    Salesforce.client.materialize("Product2")
+    sf_products = Salesforce.all_pages(Product2.query(query))
+    sf_products.reject {|p| p.ProductCode.blank? || p.Description.blank?}.each do |sf_product|
+      Product.create! sf_to_rails(sf_product)
+    end
+  end
+
+  # returns a hash
+  def self.sf_to_rails(sf_product)
+    { product_number: sf_product.ProductCode,
+      description:    sf_product.Description }
+  end
+
+  class NullPrice
+    def price
+      0
+    end
   end
 end

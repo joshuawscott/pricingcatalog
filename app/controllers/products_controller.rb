@@ -5,9 +5,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if params[:q].blank?
-      @products = Product.limit(25)
+      @products = Product.paginate(page: params[:page])
     else
-      @products = Product.where("lower(product_number) like(?)", "%#{params[:q].downcase}%").limit(25)
+      @products = Product.where("lower(product_number) like(?)", "%#{params[:q].downcase}%").paginate(page: params[:page])
     end
   end
 
