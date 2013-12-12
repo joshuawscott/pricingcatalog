@@ -32,14 +32,19 @@ class Product < ActiveRecord::Base
     Salesforce.client.materialize("Product2")
     sf_products = Salesforce.all_pages(Product2.query(query))
     sf_products.reject {|p| p.ProductCode.blank? || p.Description.blank?}.each do |sf_product|
-      Product.create! sf_to_rails(sf_product)
+      match = Product.where(product_number: sf_product.ProductCode).first
+      if match
+        match.update_attributes sf_to_rails(sf_product)
+      else
+        Product.create sf_to_rails(sf_product)
+      end
     end
   end
 
   # returns a hash
   def self.sf_to_rails(sf_product)
     { product_number: sf_product.ProductCode,
-      description:    sf_product.Description }
+      description:    sf_product.Description.to_s[0..250] }
   end
 
   class NullPrice
