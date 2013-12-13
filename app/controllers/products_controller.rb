@@ -69,6 +69,7 @@ class ProductsController < ApplicationController
 
   def price_lookup
     product_numbers = params[:pn].split(',')
+    @date = Date.parse(params[:asofdate]) || Time.now
     @products = Product.where(product_number: product_numbers)
     if @products.present?
       found_product_numbers = @products.map(&:product_number)

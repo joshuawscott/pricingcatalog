@@ -13,8 +13,9 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :competitor_prices
   accepts_nested_attributes_for :costs
 
-  def current_list_price
-    list_prices.order(:valid_date).last || NullPrice.new
+  def current_list_price(date = Time.now)
+    date ||= Time.now # in case nil is passed
+    list_prices.order(:valid_date).where("valid_date::date <= ?", date).last || NullPrice.new
   end
 
   def current_cost
@@ -49,7 +50,7 @@ class Product < ActiveRecord::Base
 
   class NullPrice
     def price
-      0
+      -1
     end
   end
 end
