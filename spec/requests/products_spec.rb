@@ -1,50 +1,56 @@
 require 'spec_helper'
 
 describe "Products" do
-  describe "GET /products" do
-    it "is successful" do
-      get products_path
-      response.status.should be(200)
+  context "normal" do
+    before { sign_in_as_a_user }
+    describe "GET /products" do
+      it "is successful" do
+        get products_path
+        response.status.should be(200)
+      end
     end
   end
 
-  describe "price_lookup" do
-    let!(:product) { Product.create! product_number: 'AB101A', description: 'MyCoolProduct'}
-    let!(:list_price) { ListPrice.create! price: 10.00, product: product }
-    let!(:product2) { Product.create! product_number: 'AB102A', description: 'MyCoolProduct2'}
-    let!(:list_price2) { ListPrice.create! price: 20.00, product: product2 }
-    before do
-      product.list_prices = [list_price]
-      product2.list_prices = [list_price2]
-      [product,product2].each {|p| p.save}
+
+  context "API" do
+    describe "price_lookup" do
+      let!(:product) { Product.create! product_number: 'AB101A', description: 'MyCoolProduct'}
+      let!(:list_price) { ListPrice.create! price: 10.00, product: product, valid_date: '2011-12-01' }
+      let!(:product2) { Product.create! product_number: 'AB102A', description: 'MyCoolProduct2'}
+      let!(:list_price2) { ListPrice.create! price: 20.00, product: product2, valid_date: '2010-12-01' }
+      before do
+        product.list_prices = [list_price]
+        product2.list_prices = [list_price2]
+        [product,product2].each {|p| p.save}
+      end
+
+      it 'returns a single product' do
+        get price_lookup_products_path(format: :json, pn: 'AB101A')
+        expect(response.body).to eq({products: [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00}]}.to_json)
+      end
+
+      it 'returns mutliple products' do
+        get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A')
+        expect(response.body).to eq({products:
+          [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
+           {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}]}.to_json)
+      end
+
+      it 'returns failures for nonexistent products' do
+        get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A,NOTFOUND')
+        expect(response.body).to eq({products:
+          [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
+           {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}],
+                                    not_found: ['NOTFOUND']}.to_json)
+
+      end
+
+      it 'returns failures when only nonexistent products' do
+        get price_lookup_products_path(format: :json, pn: 'NOTFOUND')
+        expect(response.body).to eq({products: [], not_found: ['NOTFOUND']}.to_json)
+      end
+
     end
-
-    it 'returns a single product' do
-      get price_lookup_products_path(format: :json, pn: 'AB101A')
-      expect(response.body).to eq({products: [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00}]}.to_json)
-    end
-
-    it 'returns mutliple products' do
-      get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A')
-      expect(response.body).to eq({products:
-        [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
-         {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}]}.to_json)
-    end
-
-    it 'returns failures for nonexistent products' do
-      get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A,NOTFOUND')
-      expect(response.body).to eq({products:
-        [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
-         {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}],
-                                  not_found: ['NOTFOUND']}.to_json)
-
-    end
-
-    it 'returns failures when only nonexistent products' do
-      get price_lookup_products_path(format: :json, pn: 'NOTFOUND')
-      expect(response.body).to eq({products: [], not_found: ['NOTFOUND']}.to_json)
-    end
-
   end
 end
 

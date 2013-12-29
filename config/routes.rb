@@ -1,13 +1,13 @@
 Pricingcatalog::Application.routes.draw do
+  devise_for :users
   resources :costs
 
   resources :list_prices
   resources :competitor_prices
 
   resources :products do
-    get 'price_lookup', on: :collection
+    get 'price_lookup', on: :collection, controller: :api_products
   end
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

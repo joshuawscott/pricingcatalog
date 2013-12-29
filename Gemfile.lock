@@ -27,6 +27,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.1)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -57,9 +58,20 @@ GEM
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.3.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.3.0)
+      factory_girl (~> 4.3.0)
+      railties (>= 3.0.0)
     haml (4.0.4)
       tilt
     haml-rails (0.4)
@@ -93,6 +105,7 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    orm_adapter (0.5.0)
     paranoia (2.0.1)
       activerecord (~> 4.0)
     pg (0.17.0)
@@ -187,6 +200,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    warden (1.2.3)
+      rack (>= 1.0)
     will_paginate (3.0.5)
 
 PLATFORMS
@@ -197,6 +212,8 @@ DEPENDENCIES
   capistrano-rails
   capistrano-unicorn
   databasedotcom
+  devise
+  factory_girl_rails
   haml
   haml-rails
   jbuilder (~> 1.2)

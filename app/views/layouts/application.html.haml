@@ -35,6 +35,20 @@
               %li= link_to "List Prices", "/list_prices"
               %li= link_to "Competitor Prices", "/competitor_prices"
               %li= link_to "Costs", "/costs"
+              %p.pull-right.large
+              - if user_signed_in?
+                Logged in as
+                %strong
+                  = current_user.email
+                %br
+                = link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
+                |
+                = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+              - else
+                = link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
+                |
+                = link_to "Login", new_user_session_path, :class => 'navbar-link'
+
 
     .container-fluid
 

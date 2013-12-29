@@ -20,6 +20,8 @@ require 'spec_helper'
 
 describe CostsController do
 
+  before {sign_in}
+
   # This should return the minimal set of attributes required to create a valid
   # Cost. As you add validations to Cost, be sure to
   # adjust the attributes here as well.

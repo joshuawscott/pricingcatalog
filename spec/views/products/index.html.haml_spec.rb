@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'will_paginate/array' #convert array to collection for pagination
 
 describe "products/index" do
   before :each do
@@ -14,7 +15,7 @@ describe "products/index" do
         :description => "Description",
         :current_list_price => mock_model(ListPrice, price: 9.99)
       )
-    ])
+    ].paginate)
   end
 
   it "renders a list of products" do

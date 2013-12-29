@@ -19,6 +19,7 @@ gem 'twitter-bootstrap-rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'will_paginate', '~> 3.0'
+gem 'devise'
 
 # Salesforce.com
 gem 'databasedotcom'
@@ -40,4 +41,5 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'factory_girl_rails'
 end

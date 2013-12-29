@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe CompetitorPricesController do
+  before {sign_in}
 
   # This should return the minimal set of attributes required to create a valid
   # CompetitorPrice. As you add validations to CompetitorPrice, be sure to

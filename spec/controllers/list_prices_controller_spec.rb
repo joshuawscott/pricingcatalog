@@ -20,6 +20,8 @@ require 'spec_helper'
 
 describe ListPricesController do
 
+  before {sign_in}
+
   # This should return the minimal set of attributes required to create a valid
   # ListPrice. As you add validations to ListPrice, be sure to
   # adjust the attributes here as well.

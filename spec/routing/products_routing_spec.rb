@@ -32,7 +32,7 @@ describe ProductsController do
     end
 
     it "routes to #price_lookup" do
-      get("/products/price_lookup?pn=AB101A").should route_to("products#price_lookup", :pn => 'AB101A')
+      get("/products/price_lookup?pn=AB101A").should route_to("api_products#price_lookup", :pn => 'AB101A')
     end
 
   end
