@@ -18,6 +18,9 @@ body {
     color: #727272;
     padding-top: 82px;
 }
+#content {
+    padding-top: 0;
+}
 /* taken from Centrics website */
 a {
     color: #3b72b2
@@ -26,9 +29,16 @@ a:link{text-decoration:none;}
 a:visited{text-decoration:none;}
 a:hover{text-decoration:underline;}
 a:active{text-decoration:none;}
-
+@media (max-width: 1250px) {
+    #content {
+    padding-top: 50px;
+    }
+}
 @media (max-width: 979px){
     body {
+        padding-top: 0;
+    }
+    #content {
         padding-top: 0;
     }
 }
@@ -36,6 +46,9 @@ a:active{text-decoration:none;}
 @media (max-width: 768px){
     body {
         background: #ECECEC none;
+        padding-top: 0;
+    }
+    #content {
         padding-top: 0;
     }
 }
