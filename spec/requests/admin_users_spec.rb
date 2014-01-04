@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "AdminUsers" do
-  before { sign_in_as_a_user }
+  before { sign_in_as_an_admin }
   describe "GET /admin_users" do
     it "works! (now write some real specs)" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers

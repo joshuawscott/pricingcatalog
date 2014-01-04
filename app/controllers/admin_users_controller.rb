@@ -1,5 +1,6 @@
 class AdminUsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_filter :admin_user?
 
   # GET /admin_users
   # GET /admin_users.json
@@ -69,5 +70,14 @@ class AdminUsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+
+    def admin_user?
+      if current_user.try(:admin?)
+        true
+      else
+        flash[:error] = "You are not authorized for that action."
+        redirect_to(root_path)
+      end
     end
 end

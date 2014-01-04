@@ -1,4 +1,7 @@
 module ControllerHelpers
+  def sign_in_admin(user = double('user', admin?: true))
+    sign_in(user)
+  end
   def sign_in(user = double('user'))
     if user.nil?
       request.env['warden'].stub(:authenticate!).
