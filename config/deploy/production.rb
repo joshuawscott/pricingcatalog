@@ -1,42 +1,24 @@
-set :stage, :production
+set :hostname, 'remote.centricsit.com'
+set :rails_env, 'production'
+set :deploy_to, "/home/deploy/www/#{application}"
+set :user, "deploy"
+set :group, "deploy"
 
-# Simple Role Syntax
-# ==================
-# Supports bulk-adding hosts to roles, the primary
-# server in each group is considered to be the first
-# unless any hosts have the primary property set.
-role :app, %w{deploy@example.com}
-role :web, %w{deploy@example.com}
-role :db,  %w{deploy@example.com}
+#chruby
+default_run_options[:shell] = '/bin/bash'
+set :ruby_version, 'ruby-2.0.0-p353'
+set :chruby_config, '/etc/profile.d/chruby.sh'
+set :set_ruby_cmd, "source #{chruby_config} && chruby #{ruby_version}"
+set(:bundle_cmd) { "#{set_ruby_cmd} && exec bundle"}
 
-# Extended Server Syntax
-# ======================
-# This can be used to drop a more detailed server
-# definition into the server list. The second argument
-# something that quacks like a hash can be used to set
-# extended properties on the server.
-server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+role :app, hostname
+role :web, hostname
+role :db, hostname, primary: true
 
-# you can set custom ssh options
-# it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
-# you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
-# set it globally
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-# and/or per server
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
-# setting per server overrides global ssh_options
+set :ssh_options, {
+    keys: %w(/Users/jscott/.ssh/id_rsa),
+    forward_agent: false,
+    auth_methods: %w(publickey),
+    port: 4022
+}
 
-# fetch(:default_env).merge!(rails_env: :production)
