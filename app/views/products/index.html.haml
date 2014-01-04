@@ -4,7 +4,8 @@
     %label{name: :q} Search:
     = text_field_tag :q, params[:q], placeholder: 'Enter Product Number'
 
-= link_to 'Add New Product', new_product_path
+=# link_to 'Add New Product', new_product_path
+%p Click product number to edit prices
 %table.table
   %tr
     %th Product Number
@@ -16,7 +17,7 @@
 
   - @products.each do |product|
     %tr
-      %td= link_to product.product_number, product
+      %td= link_to product.product_number, product, title: 'Click to edit prices'
       %td= product.description
       %td= number_to_currency(product.current_list_price.price)
       -#
@@ -26,4 +27,4 @@
 
 =will_paginate @products
 
-= link_to 'Add New Product', new_product_path
+=# link_to 'Add New Product', new_product_path
