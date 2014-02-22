@@ -14,6 +14,7 @@ Pricingcatalog::Application.routes.draw do
 
   resources :products do
     get 'price_lookup', on: :collection, controller: :api_products
+    post 'update_from_salesforce', on: :collection
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

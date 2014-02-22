@@ -7,11 +7,13 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :product_number
   validates_presence_of :description
-  validates_uniqueness_of :product_number, case_sensitive: false
+  validates_uniqueness_of :product_number, case_sensitive: false, scope: "deleted_at"
 
   accepts_nested_attributes_for :list_prices
   accepts_nested_attributes_for :competitor_prices
   accepts_nested_attributes_for :costs
+
+  SF_PRODUCT_CODE = :ProductCode
 
   def current_list_price(date = Time.now)
     date ||= Time.now # in case nil is passed
@@ -28,12 +30,13 @@ class Product < ActiveRecord::Base
     else
       time = Product.pluck(:updated_at).max
       last_update = DateTime.new time.year, time.month, time.day, time.hour, time.min, time.sec
-      query = "LastModifiedDate > #{last_update} AND IsActive = true"
+      query = "LastModifiedDate >= #{last_update} AND IsActive = true"
     end
     Salesforce.client.materialize("Product2")
+    logger.info "Salesforce Load: Product2 WHERE #{query}"
     sf_products = Salesforce.all_pages(Product2.query(query))
-    sf_products.reject {|p| p.ProductCode.blank? || p.Description.blank?}.each do |sf_product|
-      match = Product.where(product_number: sf_product.ProductCode).first
+    sf_products.reject {|p| p.send(SF_PRODUCT_CODE).blank? || p.Description.blank?}.each do |sf_product|
+      match = Product.where(product_number: sf_product.send(SF_PRODUCT_CODE)).first
       if match
         match.update_attributes sf_to_rails(sf_product)
       else
@@ -44,8 +47,10 @@ class Product < ActiveRecord::Base
 
   # returns a hash
   def self.sf_to_rails(sf_product)
-    { product_number: sf_product.ProductCode,
-      description:    sf_product.Description.to_s[0..250] }
+    { product_number: sf_product.send(SF_PRODUCT_CODE),
+      description:    sf_product.Description.to_s[0..250],
+      updated_at:     sf_product.LastModifiedDate
+    }
   end
 
   class NullPrice

@@ -67,6 +67,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update_from_salesforce
+    products_added = Product.update_from_salesforce.size
+    flash[:notice] = "Successfully updated #{products_added} products from Salesforce"
+    redirect_to products_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
