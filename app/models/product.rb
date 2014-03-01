@@ -20,8 +20,12 @@ class Product < ActiveRecord::Base
     list_prices.order(:valid_date).where("valid_date::date <= ?", date).last || NullPrice.new
   end
 
-  def current_cost
-    costs.order(:valid_date).last
+  def current_cost(date = Time.now)
+    costs.order(:valid_date).where("valid_date::date <= ?", date).last || NullPrice.new
+  end
+
+  def current_competitor_price(date = Time.now)
+    competitor_prices.order(:valid_date).where("valid_date::date <= ?", date).last || NullPrice.new
   end
 
   def self.update_from_salesforce
@@ -40,7 +44,8 @@ class Product < ActiveRecord::Base
       if match
         match.update_attributes sf_to_rails(sf_product)
       else
-        Product.create sf_to_rails(sf_product)
+        product = Product.create sf_to_rails(sf_product)
+        ListPrice.create_from_sf(product.id, sf_product)
       end
     end
   end
