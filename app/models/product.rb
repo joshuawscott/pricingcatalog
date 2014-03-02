@@ -46,6 +46,7 @@ class Product < ActiveRecord::Base
       else
         product = Product.create sf_to_rails(sf_product)
         ListPrice.create_from_sf(product.id, sf_product)
+        Cost.create_from_sf(product.id, sf_product)
       end
     end
   end
