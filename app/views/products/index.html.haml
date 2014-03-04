@@ -17,6 +17,8 @@
   %tr
     %th Product Number
     %th Description
+    %th OEM 24x7x4 P&L 1 Year Price
+    %th Product Cost
     %th Current List Price
     -#
       %th
@@ -26,7 +28,9 @@
     %tr
       %td= link_to product.product_number, product, title: 'Click to edit prices'
       %td= product.description
-      %td= number_to_currency(product.current_list_price.price)
+      %td= num_to_cur(product.current_list_price.annual_price)
+      %td= num_to_cur(product.current_cost.price)
+      %td= num_to_cur(product.current_list_price.price)
       -#
         %td= link_to 'Edit', edit_product_path(product)
         %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }

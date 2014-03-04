@@ -63,5 +63,8 @@ class Product < ActiveRecord::Base
     def price
       -1
     end
+    def annual_price
+      -1
+    end
   end
 end
