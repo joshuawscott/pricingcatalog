@@ -13,6 +13,8 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :competitor_prices
   accepts_nested_attributes_for :costs
 
+  before_save :downcase_product_number
+
   SF_PRODUCT_CODE = :ProductCode
 
   def current_list_price(date = Time.now)
@@ -57,6 +59,10 @@ class Product < ActiveRecord::Base
       description:    sf_product.Description.to_s[0..250],
       updated_at:     sf_product.LastModifiedDate
     }
+  end
+
+  def downcase_product_number
+    self.product_number = product_number.downcase
   end
 
   class NullPrice

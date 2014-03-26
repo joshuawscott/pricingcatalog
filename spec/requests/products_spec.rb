@@ -26,28 +26,28 @@ describe "Products" do
 
       it 'returns a single product' do
         get price_lookup_products_path(format: :json, pn: 'AB101A')
-        expect(response.body).to eq({products: [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00}]}.to_json)
+        expect(response.body).to eq({products: [{product_number: 'ab101a', description: 'MyCoolProduct', list_price: 10.00, cost: -1.0, competitor_price: -1.0}]}.to_json)
       end
 
       it 'returns mutliple products' do
         get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A')
         expect(response.body).to eq({products:
-          [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
-           {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}]}.to_json)
+                                     [{product_number: 'ab101a', description: 'MyCoolProduct', list_price: 10.00, cost: -1.0, competitor_price: -1.0 },
+                                      {product_number: 'ab102a', description: 'MyCoolProduct2', list_price: 20.00, cost: -1.0, competitor_price: -1.0}]}.to_json)
       end
 
       it 'returns failures for nonexistent products' do
         get price_lookup_products_path(format: :json, pn: 'AB101A,AB102A,NOTFOUND')
         expect(response.body).to eq({products:
-          [{product_number: 'AB101A', description: 'MyCoolProduct', list_price: 10.00 },
-           {product_number: 'AB102A', description: 'MyCoolProduct2', list_price: 20.00}],
-                                    not_found: ['NOTFOUND']}.to_json)
+                                     [{product_number: 'ab101a', description: 'MyCoolProduct', list_price: 10.00, cost: -1.0, competitor_price: -1.0 },
+                                      {product_number: 'ab102a', description: 'MyCoolProduct2', list_price: 20.00, cost: -1.0, competitor_price: -1.0}],
+                                    not_found: ['notfound']}.to_json)
 
       end
 
       it 'returns failures when only nonexistent products' do
         get price_lookup_products_path(format: :json, pn: 'NOTFOUND')
-        expect(response.body).to eq({products: [], not_found: ['NOTFOUND']}.to_json)
+        expect(response.body).to eq({products: [], not_found: ['notfound']}.to_json)
       end
 
     end
