@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :competitor_prices
   accepts_nested_attributes_for :costs
 
-  before_save :downcase_product_number
+  before_save :upcase_product_number
 
   SF_PRODUCT_CODE = :ProductCode
 
@@ -42,7 +42,8 @@ class Product < ActiveRecord::Base
     logger.info "Salesforce Load: Product2 WHERE #{query}"
     sf_products = Salesforce.all_pages(Product2.query(query))
     sf_products.reject {|p| p.send(SF_PRODUCT_CODE).blank? || p.Description.blank?}.each do |sf_product|
-      match = Product.where(product_number: sf_product.send(SF_PRODUCT_CODE)).first
+      pn = sf_product.send(SF_PRODUCT_CODE).upcase
+      match = Product.where(product_number: pn).first
       if match
         match.update_attributes sf_to_rails(sf_product)
       else
@@ -61,8 +62,8 @@ class Product < ActiveRecord::Base
     }
   end
 
-  def downcase_product_number
-    self.product_number = product_number.downcase
+  def upcase_product_number
+    self.product_number = product_number.upcase
   end
 
   class NullPrice

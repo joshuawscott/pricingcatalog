@@ -46,8 +46,8 @@ describe Product do
   end
 
   describe 'product_number' do
-    it 'should set the product number to lowercase' do
-      expect(product.product_number).to eq product.product_number.downcase
+    it 'should set the product number to uppercase' do
+      expect(product.product_number).to eq product.product_number.upcase
     end
   end
 
